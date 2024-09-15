@@ -18,6 +18,8 @@ export default defineConfig({
     include: ['lib/**/*.test.ts', 'lib/**/*.spec.ts'],
     coverage: {
       provider: 'v8',
+      include: ['lib/**/*.test.ts', 'lib/**/*.spec.ts'],
+      exclude: ['lib/index.ts'],
     },
   },
 });

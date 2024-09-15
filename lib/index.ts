@@ -1,5 +1,3 @@
-export const x = 'index';
-
-export function sum(a: number, b: number) {
-  return a + b;
-}
+export * from './Result';
+export * from './Ok';
+export * from './Err';
