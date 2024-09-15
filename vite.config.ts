@@ -7,7 +7,7 @@ export default defineConfig({
         main: './lib/index.ts',
       },
       formats: ['es', 'cjs'],
-      name: 'library-template',
+      name: 'ts-result',
       fileName: (format) => {
         return `${format}/index.js`;
       },

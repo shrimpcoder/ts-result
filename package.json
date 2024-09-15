@@ -1,12 +1,20 @@
 {
-  "name": "library-template",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@shrimpcoder/ts-result",
+  "version": "0.1.0",
+  "description": "A TypeScript-based Result library",
+  "keywords": [
+    "result",
+    "typescript",
+    "rust"
+  ],
+  "author": "shrimpcoder <shrimpcoder97@gmail.com> (https://github.com/shrimpcoder)",
+  "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shrimpcoder/library-template"
+    "url": "https://github.com/shrimpcoder/ts-result"
   },
+  "homepage": "https://shrimpcoder.github.io/ts-result/index.html",
   "files": [
     "dist"
   ],
