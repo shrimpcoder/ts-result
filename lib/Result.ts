@@ -74,7 +74,9 @@ export namespace Result {
    * If the function succeeds, the Ok is returned.
    * If the function fails, the Err is returned.
    * @param {function(): T} fn - The function to be run.
-   * @returns {Result<T, Error>} A Result that is the result of running the given function.
+   * @returns {Result<T, E>} A Result that is the result of running the given function.
+   * @template T - The type of the value.
+   * @template E - The type of the error.
    * @example
    * ```ts
    * const result = Result.run(() => {
@@ -91,11 +93,11 @@ export namespace Result {
    * }
    * ```
    */
-  export function run<T>(fn: () => T): Result<T, Error> {
+  export function run<T, E = Error>(fn: () => T): Result<T, E> {
     try {
       return new Ok(fn());
     } catch (error) {
-      return new Err(error as Error);
+      return new Err(error as E);
     }
   }
 
@@ -104,7 +106,9 @@ export namespace Result {
    * If the function succeeds, the Ok is returned.
    * If the function fails, the Err is returned.
    * @param {function(): Promise<T>} fn - The async function to be run.
-   * @returns {Promise<Result<T, Error>>} A Promise that resolves to a Result that is the result of running the given async function.
+   * @returns {Promise<Result<T, E>>} A Promise that resolves to a Result that is the result of running the given async function.
+   * @template T - The type of the value.
+   * @template E - The type of the error.
    * @example
    * ```ts
    * const result = await Result.runAsync(async () => {
@@ -121,9 +125,9 @@ export namespace Result {
    * }
    * ```
    */
-  export async function runAsync<T>(fn: () => Promise<T>): Promise<Result<T, Error>> {
+  export async function runAsync<T, E = Error>(fn: () => Promise<T>): Promise<Result<T, E>> {
     return fn()
       .then((value) => new Ok(value))
-      .catch((error) => new Err(error as Error));
+      .catch((error) => new Err(error as E));
   }
 }
