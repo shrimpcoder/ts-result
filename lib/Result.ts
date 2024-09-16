@@ -3,8 +3,25 @@ import { Ok } from './Ok';
 
 /**
  * Result is a type that represents a result of an operation that may or may not be successful.
+ * @template T - The type of the value.
+ * @template E - The type of the error.
+ * @example
+ * ```ts
+ * const result: Result<number, string> = new Ok(42);
+ * const result2: Result<number, string> = new Err('Error');
+ * ```
+ *
+ * @see {@link Ok}
+ * @see {@link Err}
+ * @see {@link Result.run}
+ * @see {@link Result.runAsync}
  */
-export interface Result<T = unknown, E = Error> {
+export type Result<T = unknown, E = Error> = Ok<T> | Err<E>;
+
+/**
+ * Result is a type that represents a result of an operation that may or may not be successful.
+ */
+export interface IResult<T = unknown, E = Error> {
   /**
    * Returns a Result.
    * If this Result is an Ok, the function returns passed Result.
@@ -95,9 +112,9 @@ export namespace Result {
    */
   export function run<T, E = Error>(fn: () => T): Result<T, E> {
     try {
-      return new Ok(fn());
+      return new Ok<T>(fn());
     } catch (error) {
-      return new Err(error as E);
+      return new Err<E>(error as E);
     }
   }
 
@@ -127,7 +144,7 @@ export namespace Result {
    */
   export async function runAsync<T, E = Error>(fn: () => Promise<T>): Promise<Result<T, E>> {
     return fn()
-      .then((value) => new Ok(value))
-      .catch((error) => new Err(error as E));
+      .then((value) => new Ok<T>(value))
+      .catch((error) => new Err<E>(error as E));
   }
 }

@@ -1,10 +1,10 @@
 import { Err } from './Err';
-import { Result } from './Result';
+import { Result, IResult } from './Result';
 
 /**
  * Ok is a type that represents a successful result.
  */
-export class Ok<T> implements Result<T, never> {
+export class Ok<T> implements IResult<T, unknown> {
   #value: T;
 
   /**
@@ -71,7 +71,7 @@ export class Ok<T> implements Result<T, never> {
    * console.log(result.isError()); // false
    * ```
    */
-  isError(): this is Err<never> {
+  isError(): this is Err<unknown> {
     return false;
   }
 
